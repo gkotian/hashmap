@@ -60,7 +60,7 @@ int main()
                 std::cin >> value;
 
                 hashMap.insertElement(key, value);
-                std::cout << "Done" << std::endl;
+                std::cout << "    Done" << std::endl;
 
                 break;
             }
@@ -98,7 +98,7 @@ int main()
             case '5':
             {
                 hashMap.deleteAll();
-                std::cout << "Done" << std::endl;
+                std::cout << "    Done" << std::endl;
                 break;
             }
 
@@ -112,14 +112,14 @@ int main()
             {
                 uint64_t numRandomPairs;
 
-                std::cout << "How many key-value pairs to generate? ";
+                std::cout << "    How many key-value pairs to generate? ";
                 std::cin >> numRandomPairs;
 
                 for (uint64_t i = 0; i < numRandomPairs; ++i)
                 {
                     hashMap.insertElement(getRandomString(10), getRandomString(10));
                 }
-                std::cout << "Done" << std::endl;
+                std::cout << "    Done" << std::endl;
 
                 break;
             }

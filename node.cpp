@@ -23,7 +23,7 @@ void Node::setValue(const std::string& v)
 
 std::ostream& operator<<(std::ostream& out, const Node& node)
 {
-    out << node.getKey() << " --> " << node.getValue();
+    out << "    " << node.getKey() << " --> " << node.getValue();
 
     return out;
 }

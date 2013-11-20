@@ -62,7 +62,7 @@ void HashMap::insertElement(const std::string& key, const std::string& value)
 
     if (hashVal >= maxHashMapSize)
     {
-        std::cout << "Hash function failure (hashVal = " << hashVal << ")" << std::endl;
+        std::cout << "    Hash function failure (hashVal = " << hashVal << ")" << std::endl;
         return;
     }
 
@@ -106,7 +106,7 @@ void HashMap::deleteElement(const std::string& key)
 
     if (hashVal >= maxHashMapSize)
     {
-        std::cout << "Element with key '" << key << "' not found." << std::endl;
+        std::cout << "    Element with key '" << key << "' not found." << std::endl;
         return;
     }
 
@@ -114,7 +114,7 @@ void HashMap::deleteElement(const std::string& key)
 
     if (listAtHashVal.empty())
     {
-        std::cout << "Element with key '" << key << "' not found." << std::endl;
+        std::cout << "    Element with key '" << key << "' not found." << std::endl;
         return;
     }
 
@@ -132,7 +132,7 @@ void HashMap::deleteElement(const std::string& key)
     {
         if (i->getKey() == key)
         {
-            std::cout << "Deleted : " << *i << std::endl;
+            std::cout << "    Deleted : " << *i << std::endl;
             listAtHashVal.erase(i);
 
             if (collisionList)
@@ -148,7 +148,7 @@ void HashMap::deleteElement(const std::string& key)
 
     if (elementFound == false)
     {
-        std::cout << "Operation failure" << std::endl;
+        std::cout << "    Operation failure" << std::endl;
     }
 }
 
@@ -158,7 +158,7 @@ void HashMap::printElement(const std::string& key)
 
     if (hashVal >= maxHashMapSize)
     {
-        std::cout << "Element with key '" << key << "' not found." << std::endl;
+        std::cout << "    Element with key '" << key << "' not found." << std::endl;
         return;
     }
 
@@ -166,7 +166,7 @@ void HashMap::printElement(const std::string& key)
 
     if (listAtHashVal.empty())
     {
-        std::cout << "Element with key '" << key << "' not found." << std::endl;
+        std::cout << "    Element with key '" << key << "' not found." << std::endl;
         return;
     }
 
@@ -196,14 +196,14 @@ void HashMap::printAll() const
 {
     if (numElements == 0)
     {
-        std::cout << "The hash map is empty." << std::endl;
+        std::cout << "    The hash map is empty." << std::endl;
         return;
     }
     else if (numElements >= 100)
     {
         std::string yesOrNo;
 
-        std::cout << "The hash map has " << numElements << " elements. Really print them all? (y/n): ";
+        std::cout << "    The hash map has " << numElements << " elements. Really print them all? (y/n): ";
         std::cin >> yesOrNo;
 
         if ((yesOrNo != "y") && (yesOrNo != "Y"))
@@ -226,31 +226,31 @@ void HashMap::printAll() const
 
 void HashMap::printDetails() const
 {
-    std::cout << "Maximum number of hash buckets           : " << maxHashMapSize << std::endl;
-    std::cout << "Maximum number of elements               : << not limited by program >>" << std::endl;
-    std::cout << "Different elements can have the same key : " << (sharedKeysAllowed ? "Yes" : "No") << std::endl;
-    std::cout << "Current number of elements               : " << numElements << std::endl;
-    std::cout << "Current number of collisions             : " << numCollisions << std::endl;
+    std::cout << "    Maximum number of hash buckets           : " << maxHashMapSize << std::endl;
+    std::cout << "    Maximum number of elements               : << not limited by program >>" << std::endl;
+    std::cout << "    Different elements can have the same key : " << (sharedKeysAllowed ? "Yes" : "No") << std::endl;
+    std::cout << "    Current number of elements               : " << numElements << std::endl;
+    std::cout << "    Current number of collisions             : " << numCollisions << std::endl;
 }
 
 void HashMap::printCollidingKeys() const
 {
     if (numElements == 0)
     {
-        std::cout << "The hash map is empty." << std::endl;
+        std::cout << "    The hash map is empty." << std::endl;
         return;
     }
 
     if (numCollisions == 0)
     {
-        std::cout << "The hash map has no collisions." << std::endl;
+        std::cout << "    The hash map has no collisions." << std::endl;
         return;
     }
     else if (numCollisions >= 500)
     {
         std::string yesOrNo;
 
-        std::cout << "The hash map has " << numCollisions << " collisions. Really print them all? (y/n): ";
+        std::cout << "    The hash map has " << numCollisions << " collisions. Really print them all? (y/n): ";
         std::cin >> yesOrNo;
 
         if ((yesOrNo != "y") && (yesOrNo != "Y"))
@@ -275,7 +275,7 @@ void HashMap::printCollidingKeys() const
                     setOfKeys.insert(j.getKey());
                 }
 
-                std::cout << "at hash bucket " << i << " : ";
+                std::cout << "    at hash bucket " << i << " : ";
 
                 for (const auto& j : setOfKeys)
                 {
@@ -286,7 +286,7 @@ void HashMap::printCollidingKeys() const
             }
             else
             {
-                std::cout << "at hash bucket " << i << " : ";
+                std::cout << "    at hash bucket " << i << " : ";
 
                 for (const auto& j : vHashMap[i])
                 {
