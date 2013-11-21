@@ -16,9 +16,9 @@ On doing various numbers of insertions of key-value pairs (both being strings of
   +--------------------+--------------------------------+--------------+
   |                    |                                |              |
   |                    |  time taken (in milliseconds)  |              |
-  |  number of random  |  [random string generation     |  number of   |
-  |  strings inserted  |     +                          |  collisions  |
-  |                    |   hashmap insertion]           |              |
+  |  number of random  |  [random key generation        |  number of   |
+  |  key-value pairs   |   + random value generation    |  collisions  |
+  |  inserted          |   + hashmap insertion]         |              |
   |                    |                                |              |
   +--------------------+--------------------------------+--------------+
   |                  1 |                              0 |            0 |
