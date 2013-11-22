@@ -1,7 +1,11 @@
 #pragma once
 
+//---- Headers ------------------------------------------------------------------------------------
+
 #include <string>
 #include <iostream>
+
+//---- Class definition(s) ------------------------------------------------------------------------
 
 class Node
 {
@@ -16,4 +20,7 @@ public:
     void setValue(const std::string&);
 };
 
+//---- Other global function prototypes -----------------------------------------------------------
+
 std::ostream& operator<<(std::ostream&, const Node&);
+

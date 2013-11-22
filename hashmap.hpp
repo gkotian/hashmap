@@ -1,10 +1,14 @@
 #pragma once
 
+//---- Headers ------------------------------------------------------------------------------------
+
 #include <vector>
 #include <list>
 #include <cstdint>
 
 #include "node.hpp"
+
+//---- Class definition(s) ------------------------------------------------------------------------
 
 class HashMap
 {
@@ -32,3 +36,4 @@ public:
     uint32_t getSize() const;
     bool containsKey(const std::string&) const;
 };
+

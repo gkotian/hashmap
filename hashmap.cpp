@@ -1,9 +1,19 @@
+//---- Headers ------------------------------------------------------------------------------------
+
 #include <iostream>
 #include <set>
 
 #include "hashmap.hpp"
 
+//---- Macros & constants -------------------------------------------------------------------------
+
+// Mask used to restrict the hash value to 16 bits.
 #define MASK_16 (((uint64_t)1 << 16) - 1)
+
+const uint8_t  HASHMAP_PRINT_ALL_ELEMENTS_THRESHOLD = 100;
+const uint16_t HASHMAP_PRINT_COLL_KEYS_THRESHOLD    = 500;
+
+//---- Private member functions -------------------------------------------------------------------
 
 // Function to generate a hash value based on the given string. In order to ensure that the
 // computed hash value is lesser than 65536, it is xor-folded as described at:
@@ -14,7 +24,7 @@ uint16_t HashMap::generateHash(const std::string& s) const
     // For doing the xor-folding, it would have been better to use a shorter initial digest
     // (maybe 32 bits long). But I have retained the value as requested in the assignment. The
     // upshot of this is more work for the CPU.
-    const uint64_t INIT = 0xCBF29CE484222325; // inital digest
+    const uint64_t INIT  = 0xCBF29CE484222325; // initial digest
     const uint64_t PRIME = 0x00000100000001B3; // prime
 
     uint64_t digest = INIT;
@@ -26,6 +36,8 @@ uint16_t HashMap::generateHash(const std::string& s) const
 
     return (((digest >> 16) ^ digest) & MASK_16);
 }
+
+//---- Constructor(s) -----------------------------------------------------------------------------
 
 // Constructor of the hash map. Once this function completes, it should be possible to index any
 // element upto the maximum hashmap size.
@@ -45,6 +57,8 @@ HashMap::HashMap(uint32_t inMaxHashMapSize, bool inSharedKeysAllowed = false) : 
     vHashMap.resize(maxHashMapSize);
 }
 
+//---- Public member functions --------------------------------------------------------------------
+
 uint32_t HashMap::getNumCollisions() const
 {
     return numCollisions;
@@ -55,7 +69,7 @@ uint32_t HashMap::getNumElements() const
     return numElements;
 }
 
-// Function to insert an element into the hashmap
+// Function to insert an element into the hashmap.
 void HashMap::insertElement(const std::string& key, const std::string& value)
 {
     uint16_t hashVal = generateHash(key);
@@ -99,7 +113,7 @@ void HashMap::insertElement(const std::string& key, const std::string& value)
     ++numElements;
 }
 
-// Function to delete an element from the hashmap
+// Function to delete an element from the hashmap.
 void HashMap::deleteElement(const std::string& key)
 {
     uint16_t hashVal = generateHash(key);
@@ -152,6 +166,7 @@ void HashMap::deleteElement(const std::string& key)
     }
 }
 
+// Function to print a single element from the hashmap.
 void HashMap::printElement(const std::string& key)
 {
     uint16_t hashVal = generateHash(key);
@@ -179,6 +194,7 @@ void HashMap::printElement(const std::string& key)
     }
 }
 
+// Function to delete all elements in the hashmap and return it to its default state.
 void HashMap::deleteAll()
 {
     // Save the size before clearing the vector, so that it can be resized to its original size.
@@ -192,6 +208,8 @@ void HashMap::deleteAll()
     numCollisions = 0;
 }
 
+// Function to print all elements in the hashmap. Asks for confirmation if there are too many
+// elements.
 void HashMap::printAll() const
 {
     if (numElements == 0)
@@ -199,7 +217,7 @@ void HashMap::printAll() const
         std::cout << "    The hash map is empty." << std::endl;
         return;
     }
-    else if (numElements >= 100)
+    else if (numElements >= HASHMAP_PRINT_ALL_ELEMENTS_THRESHOLD)
     {
         std::string yesOrNo;
 
@@ -224,6 +242,7 @@ void HashMap::printAll() const
     }
 }
 
+// Function to print details (or a summary) about the hashmap.
 void HashMap::printDetails() const
 {
     std::cout << "    Maximum number of hash buckets           : " << maxHashMapSize << std::endl;
@@ -233,6 +252,8 @@ void HashMap::printDetails() const
     std::cout << "    Current number of collisions             : " << numCollisions << std::endl;
 }
 
+// Function to print all colliding keys in the hashmap. Asks for confirmation if there are too many
+// elements.
 void HashMap::printCollidingKeys() const
 {
     if (numElements == 0)
@@ -246,7 +267,7 @@ void HashMap::printCollidingKeys() const
         std::cout << "    The hash map has no collisions." << std::endl;
         return;
     }
-    else if (numCollisions >= 500)
+    else if (numCollisions >= HASHMAP_PRINT_COLL_KEYS_THRESHOLD)
     {
         std::string yesOrNo;
 
@@ -304,6 +325,7 @@ uint32_t HashMap::getSize() const
     return numElements;
 }
 
+// Function to check whether or not the given key exists in the hashmap.
 bool HashMap::containsKey(const std::string& key) const
 {
     uint16_t hashVal = generateHash(key);
@@ -325,3 +347,4 @@ bool HashMap::containsKey(const std::string& key) const
 
     return false;
 }
+

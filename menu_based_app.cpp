@@ -1,11 +1,23 @@
+//---- Headers ------------------------------------------------------------------------------------
+
 #include <iostream>
 #include <algorithm>
 #include <sys/time.h>
 
 #include "hashmap.hpp"
 
-const uint32_t MAX_HASHMAP_SIZE = 65536;
+//---- Macros & constants -------------------------------------------------------------------------
+
+const uint32_t MAX_HASHMAP_SIZE    = 65536;
 const bool     SHARED_KEYS_ALLOWED = false;
+
+//---- Local function prototypes ------------------------------------------------------------------
+
+uint64_t getCurTimeInMS();
+std::string getRandomString(size_t);
+void showMenu();
+
+//---- Local functions ----------------------------------------------------------------------------
 
 uint64_t getCurTimeInMS()
 {
@@ -50,6 +62,8 @@ void showMenu()
     std::cout << "8. List colliding keys" << std::endl;
     std::cout << "9. Exit" << std::endl;
 }
+
+//---- The main function --------------------------------------------------------------------------
 
 int main()
 {
@@ -168,3 +182,4 @@ int main()
     }
     while (option != '9');
 }
+
