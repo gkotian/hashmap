@@ -18,6 +18,7 @@ private:
     std::vector< std::list<Node> > vHashMap;
     uint32_t numCollisions;
     uint32_t numElements;
+    uint32_t numOccupiedBuckets;
     uint16_t generateHash(const std::string&) const;
 
 public:

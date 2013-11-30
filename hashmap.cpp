@@ -44,7 +44,8 @@ uint16_t HashMap::generateHash(const std::string& s) const
 HashMap::HashMap(uint32_t inMaxHashMapSize, bool inSharedKeysAllowed = false) : maxHashMapSize(inMaxHashMapSize),
                                                                                 sharedKeysAllowed(inSharedKeysAllowed),
                                                                                 numCollisions(0),
-                                                                                numElements(0)
+                                                                                numElements(0),
+                                                                                numOccupiedBuckets(0)
 {
     // Currently, the maximum allowed size of the hash map is 65536.
     if (maxHashMapSize > 65536)
@@ -107,6 +108,10 @@ void HashMap::insertElement(const std::string& key, const std::string& value)
             }
         }
     }
+    else
+    {
+        ++numOccupiedBuckets;
+    }
 
     // Add a new entry.
     listAtHashVal.push_front(Node(key, value));
@@ -164,6 +169,13 @@ void HashMap::deleteElement(const std::string& key)
     {
         std::cout << "    Operation failure" << std::endl;
     }
+    else
+    {
+        if (listAtHashVal.empty())
+        {
+            --numOccupiedBuckets;
+        }
+    }
 }
 
 // Function to print a single element from the hashmap.
@@ -206,6 +218,7 @@ void HashMap::deleteAll()
 
     numElements = 0;
     numCollisions = 0;
+    numOccupiedBuckets = 0;
 }
 
 // Function to print all elements in the hashmap. Asks for confirmation if there are too many
@@ -246,6 +259,7 @@ void HashMap::printAll() const
 void HashMap::printDetails() const
 {
     std::cout << "    Maximum number of hash buckets           : " << maxHashMapSize << std::endl;
+    std::cout << "    Number of occupied hash buckets          : " << numOccupiedBuckets << std::endl;
     std::cout << "    Maximum number of elements               : << not limited by program >>" << std::endl;
     std::cout << "    Different elements can have the same key : " << (sharedKeysAllowed ? "Yes" : "No") << std::endl;
     std::cout << "    Current number of elements               : " << numElements << std::endl;
